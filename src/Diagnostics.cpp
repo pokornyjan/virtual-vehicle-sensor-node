@@ -1,5 +1,6 @@
 #include "Diagnostics.hpp"
 #include <iostream>
+#include <algorithm>
 
 Diagnostics::Diagnostics() : initialized(false) {}
 
@@ -44,7 +45,7 @@ void Diagnostics::logMessage(DiagnosticLevel level, const std::string& message,
               << ": " << message << std::endl;
 }
 
-std::vector<DiagnosticMessage> Diagnostics::getMessages() const {
+const std::vector<DiagnosticMessage>& Diagnostics::getMessages() const {
     return messages;
 }
 
@@ -54,10 +55,7 @@ void Diagnostics::clearMessages() {
 }
 
 bool Diagnostics::hasErrors() const {
-    for (const auto& msg : messages) {
-        if (msg.level == DiagnosticLevel::ERROR || msg.level == DiagnosticLevel::CRITICAL) {
-            return true;
-        }
-    }
-    return false;
+    return std::any_of(messages.begin(), messages.end(), [](const auto& msg) {
+        return msg.level == DiagnosticLevel::ERROR || msg.level == DiagnosticLevel::CRITICAL;
+    });
 }

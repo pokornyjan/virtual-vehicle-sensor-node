@@ -26,7 +26,7 @@ public:
     void initialize();
     void logMessage(DiagnosticLevel level, const std::string& message, 
                    const std::string& component = "Unknown");
-    std::vector<DiagnosticMessage> getMessages() const;
+    const std::vector<DiagnosticMessage>& getMessages() const;
     void clearMessages();
     bool hasErrors() const;
     

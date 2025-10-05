@@ -26,7 +26,7 @@ public:
     
     void initialize();
     ParsedMessage parseMessage(const std::string& rawMessage);
-    std::string serializeMessage(const ParsedMessage& message);
+    std::string serializeMessage(const ParsedMessage& message) const;
     bool validateMessage(const std::string& message) const;
     
 private:

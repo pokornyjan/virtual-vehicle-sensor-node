@@ -35,7 +35,7 @@ void DataProcessor::processSensorData(const SensorData& data) {
     }
 }
 
-std::vector<SensorData> DataProcessor::getProcessedData() const {
+const std::vector<SensorData>& DataProcessor::getProcessedData() const {
     return processedData;
 }
 

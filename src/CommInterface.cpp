@@ -24,7 +24,7 @@ void CommInterface::shutdown() {
     }
 }
 
-bool CommInterface::sendMessage(const std::string& message) {
+bool CommInterface::sendMessage(const std::string& message) const {
     if (!connected) {
         return false;
     }

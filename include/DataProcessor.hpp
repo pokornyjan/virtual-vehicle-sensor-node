@@ -18,7 +18,7 @@ public:
     
     void initialize();
     void processSensorData(const SensorData& data);
-    std::vector<SensorData> getProcessedData() const;
+    const std::vector<SensorData>& getProcessedData() const;
     void clearData();
     bool validateData(const SensorData& data) const;
     

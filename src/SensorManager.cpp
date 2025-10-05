@@ -44,6 +44,6 @@ bool SensorManager::isSensorActive(const std::string& sensorId) const {
     return std::find(activeSensors.begin(), activeSensors.end(), sensorId) != activeSensors.end();
 }
 
-std::vector<std::string> SensorManager::getActiveSensors() const {
+const std::vector<std::string>& SensorManager::getActiveSensors() const {
     return activeSensors;
 }

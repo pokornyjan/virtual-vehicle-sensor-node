@@ -10,7 +10,7 @@ public:
     
     bool initialize(int port = 8080);
     void shutdown();
-    bool sendMessage(const std::string& message);
+    bool sendMessage(const std::string& message) const;
     void setMessageHandler(std::function<void(const std::string&)> handler);
     bool isConnected() const;
     

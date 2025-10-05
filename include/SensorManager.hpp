@@ -14,7 +14,7 @@ public:
     void addSensor(const std::string& sensorId);
     void removeSensor(const std::string& sensorId);
     bool isSensorActive(const std::string& sensorId) const;
-    std::vector<std::string> getActiveSensors() const;
+    const std::vector<std::string>& getActiveSensors() const;
     
 private:
     std::vector<std::string> activeSensors;

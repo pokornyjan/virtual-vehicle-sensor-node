@@ -1,6 +1,7 @@
 #include "MessageParser.hpp"
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 
 MessageParser::MessageParser() : initialized(false) {}
 
@@ -26,6 +27,7 @@ ParsedMessage MessageParser::parseMessage(const std::string& rawMessage) {
     }
     
     ParsedMessage result;
+    result.type = MessageType::UNKNOWN;
     result.isValid = false;
     
     if (rawMessage.empty()) {
@@ -56,14 +58,16 @@ ParsedMessage MessageParser::parseMessage(const std::string& rawMessage) {
     return result;
 }
 
-std::string MessageParser::serializeMessage(const ParsedMessage& message) {
+std::string MessageParser::serializeMessage(const ParsedMessage& message) const {
     std::string typeStr = "UNKNOWN";
     
-    for (const auto& pair : typeMapping) {
-        if (pair.second == message.type) {
-            typeStr = pair.first;
-            break;
-        }
+    auto it = std::find_if(typeMapping.begin(), typeMapping.end(), 
+        [&message](const auto& pair) {
+            return pair.second == message.type;
+        });
+    
+    if (it != typeMapping.end()) {
+        typeStr = it->first;
     }
     
     return typeStr + ":" + message.payload;
