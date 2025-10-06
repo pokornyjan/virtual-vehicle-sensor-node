@@ -44,14 +44,26 @@ void DataProcessor::clearData() {
     std::cout << "DataProcessor: Data cleared" << std::endl;
 }
 
+std::string DataProcessor::extractSensorType(const std::string& sensorId) const {
+    // Assuming sensorId format is "type_id", e.g., "temperature_01"
+    size_t underscorePos = sensorId.find('_');
+    if (underscorePos != std::string::npos) {
+        return sensorId.substr(0, underscorePos);
+    }
+    return sensorId; // If no underscore, return the whole ID
+}
+
 bool DataProcessor::validateData(const SensorData& data) const {
     // Basic validation
     if (data.sensorId.empty()) return false;
     if (data.value == std::numeric_limits<double>::infinity()) return false;
     if (data.value != data.value) return false; // Check for NaN
     
+    // Extract sensor type from sensorId
+    std::string sensorType = extractSensorType(data.sensorId);
+    
     // Check against thresholds if available
-    auto it = thresholds.find(data.sensorId);
+    auto it = thresholds.find(sensorType);
     if (it != thresholds.end()) {
         return std::abs(data.value) <= it->second;
     }
