@@ -1,0 +1,9 @@
+# Cppcheck suppressions for virtual-vehicle-sensor-node
+# Suppress unused function warnings - expected for library/framework code
+unusedFunction
+
+# Suppress missing include warnings for standard library
+missingIncludeSystem
+
+# Suppress performance suggestions that are inconclusive
+functionStatic
