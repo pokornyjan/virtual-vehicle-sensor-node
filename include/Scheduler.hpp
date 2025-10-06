@@ -21,6 +21,7 @@ public:
     
     void initialize();
     void shutdown();
+    void setNumber(int number);
     std::string addTask(std::function<void()> callback, 
                        std::chrono::milliseconds interval, 
                        bool recurring = true);
@@ -33,6 +34,6 @@ private:
     std::vector<Task> tasks;
     bool running;
     bool initialized;
-    
+    int mNumber;
     void executeReadyTasks();
 };

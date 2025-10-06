@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <thread>
 
-Scheduler::Scheduler() : running(false), initialized(false) {}
+Scheduler::Scheduler() : running(false), initialized(false), mNumber(0) {}
 
 Scheduler::~Scheduler() {
     if (running) {
@@ -27,6 +27,11 @@ void Scheduler::shutdown() {
     }
 }
 
+void Scheduler::setNumber(int number) {
+    mNumber = number;
+}
+
+
 std::string Scheduler::addTask(std::function<void()> callback, 
                               std::chrono::milliseconds interval, 
                               bool recurring) {
@@ -34,7 +39,7 @@ std::string Scheduler::addTask(std::function<void()> callback,
         initialize();
     }
     
-    static int taskCounter = 0;
+    static int taskCounter = mNumber;
     std::string taskId = "task_" + std::to_string(++taskCounter);
     
     Task task{
